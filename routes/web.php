@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TagController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TagController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +28,7 @@ Route::middleware('auth')->group(function () {
         return '
             <h2>管理者画面へログイン成功しました！</h2>
             <form action="/logout" method="POST">
-            ' . csrf_field() . '
+            '.csrf_field().'
                 <button type="submit">ログアウト</button>
             </form>
     ';
