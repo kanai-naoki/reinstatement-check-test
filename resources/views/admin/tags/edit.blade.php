@@ -25,8 +25,7 @@
                         class="px-6 py-2 bg-[#e8ddd2] text-[#9a938c] rounded hover:bg-[#ddd2c7] inline-block">
                         戻る
                     </a>
-                    <button type="submit"
-                        class="px-6 py-2 bg-[#7d7470] text-white rounded hover:bg-[#6b5f57]">
+                    <button type="submit" class="px-6 py-2 bg-[#7d7470] text-white rounded hover:bg-[#6b5f57]">
                         更新
                     </button>
                 </div>
