@@ -24,14 +24,14 @@ Route::get('/thanks', [ContactController::class, 'thanks'])->name('contact.thank
 // routes/web.php
 // 認証（ログイン）が必要な管理者専用グループ
 Route::middleware('auth')->group(function () {
-    /*
+
     // 1. 管理画面一覧
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
     // 2. お問い合わせ詳細・削除
     Route::get('/admin/contacts/{contact}', [AdminController::class, 'show'])->name('admin.show');
     Route::delete('/admin/contacts/{contact}', [AdminController::class, 'destroy'])->name('admin.destroy');
-    */
+
     // 3. タグ関連（追加・編集画面・更新・削除）
     Route::post('/admin/tags', [TagController::class, 'store'])->name('admin.tags.store');
     Route::get('/admin/tags/{tag}/edit', [TagController::class, 'edit'])->name('admin.tags.edit');
