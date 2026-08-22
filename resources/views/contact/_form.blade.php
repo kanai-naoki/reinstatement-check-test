@@ -160,7 +160,8 @@
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                    </path>
                 </svg>
             </div>
         </div>
@@ -172,25 +173,25 @@
 
 <!-- タグ -->
 @isset($tags)
-<div class="grid grid-cols-3 gap-8 mb-4">
-    <div class="col-span-1 flex items-center">
-        <label class="text-sm text-[#6b5744]">
-            タグ
-        </label>
-    </div>
-    <div class="col-span-2">
-        <div class="flex flex-wrap gap-4 py-3">
-            @foreach ($tags as $tag)
-                <label class="flex items-center cursor-pointer">
-                    <input type="checkbox" name="tag_ids[]" value="{{ $tag->id }}"
-                        {{ in_array($tag->id, old('tag_ids', [])) ? 'checked' : '' }}
-                        class="w-4 h-4 text-[#6b5744] border-gray-300 focus:ring-[#6b5744]" />
-                    <span class="ml-2 text-gray-700">{{ $tag->name }}</span>
-                </label>
-            @endforeach
+    <div class="grid grid-cols-3 gap-8 mb-4">
+        <div class="col-span-1 flex items-center">
+            <label class="text-sm text-[#6b5744]">
+                タグ
+            </label>
+        </div>
+        <div class="col-span-2">
+            <div class="flex flex-wrap gap-4 py-3">
+                @foreach ($tags as $tag)
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" name="tag_ids[]" value="{{ $tag->id }}"
+                            {{ in_array($tag->id, old('tag_ids', [])) ? 'checked' : '' }}
+                            class="w-4 h-4 text-[#6b5744] border-gray-300 focus:ring-[#6b5744]" />
+                        <span class="ml-2 text-gray-700">{{ $tag->name }}</span>
+                    </label>
+                @endforeach
+            </div>
         </div>
     </div>
-</div>
 @endisset
 
 <!-- お問い合わせ内容 -->
