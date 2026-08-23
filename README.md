@@ -1,66 +1,172 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# COACHTECH お問い合わせフォーム
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 概要
 
-## About Laravel
+本プロジェクトは、一般ユーザーからの問い合わせ受付機能および管理者による問い合わせデータ管理を行うWebアプリケーションです。
+Traditional Web (SSR) 構成をベースとし、基本機能に加えてデータエクスポートや外部連携用の REST API（応用機能）を実装しています。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 実装機能一覧
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### 【一般ユーザー向け機能】
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **お問い合わせ入力ページ** (`/`)
+    - 入力項目（姓・名・性別・メール・電話・住所・建物名・内容）の入力
+    - カテゴリ（ドロップダウン選択）およびタグ（チェックボックス複数選択）の設定
+    - FormRequest によるリアルタイムなバリデーション表示
+- **お問い合わせ確認ページ** (`/contacts/confirm`)
+    - 入力内容の確認表示（性別・カテゴリ・タグは名称表示）
+    - 「送信」によるデータ保存、または「修正」による入力画面へのリダイレクト（入力値保持）
+- **サンクスページ** (`/thanks`)
+    - 送信完了メッセージの表示およびトップページへの導線
 
-## Learning Laravel
+#### 【管理者向け機能】
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **管理者登録・ログイン・ログアウト** (`/register`, `/login`, `/logout`)
+    - Laravel Fortify を活用した認証機能
+- **管理画面（お問い合わせ一覧）** (`/admin`)
+    - お問い合わせ一覧表示（7件ずつのページネーション）
+    - 条件検索（名前・メール・性別・カテゴリ・日付による絞り込み）
+    - 検索条件のリセット機能
+    - **【応用】CSVエクスポート機能** (`/contacts/export`)：検索結果をBOM付きCSVとしてダウンロード
+- **お問い合わせ詳細・削除** (`/admin/contacts/{contact}`)
+    - 問い合わせ詳細情報の表示およびデータ削除
+- **タグ管理機能** (`/admin/tags`)
+    - タグの新規追加・編集・削除
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### 【公開API機能（応用）】
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- 外部連携用 REST API エンドポイント（CRUD操作対応、JSON形式レスポンス）
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 開発環境URL
 
-### Premium Partners
+- **Webアプリケーション**: [http://localhost](http://localhost)
+- **phpMyAdmin**: [http://localhost:8080](http://localhost:8080)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## 使用技術
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **OS**: Linux (Docker環境)
+- **言語 / 構成**: PHP 8.2 / Laravel 10.x
+- **データベース**: MySQL 8.0
+- **Webサーバー**: Nginx
+- **フロントエンド**: Vite, Tailwind CSS ^3.4.0, Alpine.js
+- **開発環境・管理ツール**: Docker, Laravel Sail, phpMyAdmin
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## ER図
 
-## Security Vulnerabilities
+![alt text](schema.drawio.pngschema.drawio.png)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## APIエンドポイント一覧
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+認証不要の REST API エンドポイントを提供しています。
+
+| HTTPメソッド | URI                          | 説明                                               |
+| :----------- | :--------------------------- | :------------------------------------------------- |
+| **GET**      | `/api/v1/contacts`           | お問い合わせ一覧取得（検索・ページネーション付き） |
+| **GET**      | `/api/v1/contacts/{contact}` | お問い合わせ詳細取得（カテゴリ・タグ情報含む）     |
+| **POST**     | `/api/v1/contacts`           | お問い合わせ新規作成                               |
+| **PUT**      | `/api/v1/contacts/{contact}` | お問い合わせ更新                                   |
+| **DELETE**   | `/api/v1/contacts/{contact}` | お問い合わせ削除                                   |
+
+---
+
+## 環境構築手順
+
+### 1. リポジトリのクローン
+
+本プロジェクトを GitHub からローカル環境へクローンします。
+
+```bash
+git clone git@github.com:kanai-naoki/reinstatement-check-test.git
+cd reinstatement-check-test
+```
+
+_(※ HTTPS経由でクローンする場合は `git clone https://github.com/kanai-naoki/reinstatement-check-test.git`)_
+
+### 2. 環境変数の設定 (`.env`)
+
+`.env.example` をコピーして `.env` を作成します。
+
+```bash
+cp .env.example .env
+```
+
+`.env` 内のデータベース設定が以下の内容になっているか確認します：
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=sail
+DB_PASSWORD=password
+```
+
+### 3. Composer パッケージのインストール
+
+Docker イメージを経由して依存関係をインストールします。
+
+```bash
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+    laravelsail/php82-composer:latest \
+    composer install
+```
+
+### 4. Docker (Laravel Sail) の起動とエイリアス設定
+
+Docker コンテナをバックグラウンドで起動します。
+
+```bash
+./vendor/bin/sail up -d
+```
+
+_(エイリアス設定)_
+
+```bash
+echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### 5. アプリケーションキーの生成
+
+```bash
+sail artisan key:generate
+```
+
+### 6. フロントエンドパッケージのインストールとビルド
+
+```bash
+sail npm install
+sail npm run build
+```
+
+### 7. データベースマイグレーションおよび初期データの投入
+
+```bash
+sail artisan migrate --seed
+```
+
+### 8. テストの実行
+
+以下のコマンドで自動テスト（PHPUnit / Pest）を実行します。
+
+```bash
+sail test
+```
+
+---
+
+## 作成者
+
+家内 直紀

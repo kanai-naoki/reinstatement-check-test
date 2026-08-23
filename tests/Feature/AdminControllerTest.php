@@ -135,7 +135,7 @@ class AdminControllerTest extends TestCase
         $other = Contact::factory()->create(['category_id' => $category->id]);
         $other->forceFill(['created_at' => now()->subDays(3)])->save();
 
-        $response = $this->actingAs($user)->get('/admin?date=' . now()->toDateString());
+        $response = $this->actingAs($user)->get('/admin?date='.now()->toDateString());
 
         $contacts = $response->viewData('contacts');
 
