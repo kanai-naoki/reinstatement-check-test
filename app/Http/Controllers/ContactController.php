@@ -37,7 +37,11 @@ class ContactController extends Controller
     {
         $inputs = $request->validated();
 
-        Contact::create($inputs);
+        $contact = Contact::create($inputs);
+
+        if ($request->filled('tag_ids')) {
+            $contact->tags()->sync($request->input('tag_ids'));
+        }
 
         return redirect()->route('contact.thanks');
     }
