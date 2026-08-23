@@ -64,6 +64,14 @@ class StoreContactRequest extends FormRequest
                 'integer',
                 'exists:categories,id',
             ],
+            'tag_ids' => [
+                'nullable',
+                'array',
+            ],
+            'tag_ids.*' => [
+                'integer',
+                'exists:tags,id',
+            ],
             'detail' => [
                 'required',
                 'string',
