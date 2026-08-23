@@ -5,7 +5,6 @@ namespace Tests\Unit;
 use App\Http\Requests\TagRequest;
 use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route as RouteFacade;
 use Illuminate\Support\Facades\Validator;
 use Tests\TestCase;

@@ -21,7 +21,7 @@ class StoreContactRequestTest extends TestCase
 
     private function validate(array $data)
     {
-        $request = new StoreContactRequest();
+        $request = new StoreContactRequest;
 
         return Validator::make($data, $request->rules(), $request->messages());
     }
