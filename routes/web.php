@@ -21,7 +21,6 @@ Route::post('/contacts/confirm', [ContactController::class, 'confirm'])->name('c
 Route::post('/contacts', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/thanks', [ContactController::class, 'thanks'])->name('contact.thanks');
 
-// routes/web.php
 // 認証（ログイン）が必要な管理者専用グループ
 Route::middleware('auth')->group(function () {
 
@@ -37,8 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/tags/{tag}/edit', [TagController::class, 'edit'])->name('admin.tags.edit');
     Route::put('/admin/tags/{tag}', [TagController::class, 'update'])->name('admin.tags.update');
     Route::delete('/admin/tags/{tag}', [TagController::class, 'destroy'])->name('admin.tags.destroy');
-    /*
+
     // 4. CSVエクスポート（応用機能）
     Route::get('/contacts/export', [ContactController::class, 'export'])->name('admin.contacts.export');
-    */
 });
