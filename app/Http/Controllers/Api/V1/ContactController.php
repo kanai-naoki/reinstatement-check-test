@@ -10,7 +10,6 @@ use App\Http\Resources\Api\V1\ContactResource;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Response;
 
 class ContactController extends Controller
 {
@@ -63,7 +62,7 @@ class ContactController extends Controller
 
         $contact = Contact::create($validated);
 
-        if (!empty($validated['tag_ids'])) {
+        if (! empty($validated['tag_ids'])) {
             $contact->tags()->sync($validated['tag_ids']);
         }
 

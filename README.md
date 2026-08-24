@@ -138,6 +138,12 @@ echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashr
 source ~/.bashrc
 ```
 
+_※ 初回起動時や他環境での実行時にストレージの権限エラーが発生する場合は、以下のコマンドを実行してください。_
+
+```bash
+sail exec laravel.test chmod -R 777 storage bootstrap/cache
+```
+
 ### 5. アプリケーションキーの生成
 
 ```bash

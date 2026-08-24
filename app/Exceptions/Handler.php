@@ -31,7 +31,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (NotFoundHttpException $e, $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'error' => 'お問い合わせが見つかりませんでした。'
+                    'error' => 'お問い合わせが見つかりませんでした。',
                 ], 404);
             }
         });
