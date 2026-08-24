@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ContactController extends Controller
 {
-    // お問い合わせフォーム入力ページ
+    // お問い合わせフォーム入力画面
     public function index()
     {
         $categories = Category::all();
@@ -20,7 +20,7 @@ class ContactController extends Controller
         return view('contact/index', compact('categories', 'tags'));
     }
 
-    // 確認画面を表示
+    // お問い合わせ確認画面
     public function confirm(StoreContactRequest $request)
     {
         $validated = $request->validated();
@@ -34,7 +34,7 @@ class ContactController extends Controller
         ));
     }
 
-    // お問い合わせを保存
+    // お問い合わせ保存
     public function store(StoreContactRequest $request)
     {
         $inputs = $request->validated();
@@ -48,7 +48,7 @@ class ContactController extends Controller
         return redirect()->route('contact.thanks');
     }
 
-    // サンクス画面を表示
+    // お問い合わせサンクス画面を表示
     public function thanks()
     {
         return view('contact.thanks');
@@ -59,7 +59,6 @@ class ContactController extends Controller
     {
         $query = Contact::with('category');
 
-        // フィルタ条件の適用
         if ($request->filled('keyword')) {
             $keyword = $request->keyword;
             $query->where(function ($q) use ($keyword) {
@@ -81,16 +80,13 @@ class ContactController extends Controller
             $query->whereDate('created_at', $request->date);
         }
 
-        // 未指定時も含め新着順で取得
         $contacts = $query->latest()->get();
 
         $response = new StreamedResponse(function () use ($contacts) {
             $handle = fopen('php://output', 'w');
 
-            // BOMの付与（Excelでの文字化け防止）
             fwrite($handle, "\xEF\xBB\xBF");
 
-            // ヘッダー行
             fputcsv($handle, [
                 'ID',
                 '氏名',
@@ -104,10 +100,8 @@ class ContactController extends Controller
                 '作成日時'
             ]);
 
-            // 性別ラベルのマッピング（プロジェクトの仕様に合わせて調整）
             $genderMap = [1 => '男性', 2 => '女性', 3 => 'その他'];
 
-            // データ行
             foreach ($contacts as $contact) {
                 fputcsv($handle, [
                     $contact->id,
