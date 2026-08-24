@@ -17,56 +17,56 @@ class StoreContactRequest extends FormRequest
             'first_name' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'last_name' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'gender' => [
                 'required',
                 'integer',
-                'in:1,2,3'
+                'in:1,2,3',
             ],
             'email' => [
                 'required',
                 'string',
                 'email',
-                'max:255'
+                'max:255',
             ],
             'tel' => [
                 'required',
                 'string',
-                'regex:/^[0-9]{10,11}$/'
+                'regex:/^[0-9]{10,11}$/',
             ],
             'address' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'building' => [
                 'nullable',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'category_id' => [
                 'required',
                 'integer',
-                'exists:categories,id'
+                'exists:categories,id',
             ],
             'detail' => [
                 'required',
                 'string',
-                'max:120'
+                'max:120',
             ],
             'tag_ids' => [
                 'nullable',
-                'array'
+                'array',
             ],
             'tag_ids.*' => [
                 'integer',
-                'exists:tags,id'
+                'exists:tags,id',
             ],
         ];
     }
@@ -84,10 +84,10 @@ class StoreContactRequest extends FormRequest
             'category_id.required' => 'お問い合わせの種類を選択してください',
             'detail.required' => 'お問い合わせ内容を入力してください',
             'detail.max:120' => 'お問い合わせ内容は120文字以内で入力してください',
-            'tel.regex'           => '電話番号はハイフンなしの10桁または11桁の数字で入力してください',
-            'gender.in'           => '性別の値が不正です',
-            'category_id.exists'  => '選択されたお問い合わせの種類が存在しません',
-            'tag_ids.*.exists'    => '選択されたタグが存在しません',
+            'tel.regex' => '電話番号はハイフンなしの10桁または11桁の数字で入力してください',
+            'gender.in' => '性別の値が不正です',
+            'category_id.exists' => '選択されたお問い合わせの種類が存在しません',
+            'tag_ids.*.exists' => '選択されたタグが存在しません',
         ];
     }
 }

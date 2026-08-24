@@ -88,7 +88,7 @@ class ContactTest extends TestCase
             'first_name' => '別の名前',
         ]);
 
-        $response = $this->getJson('/api/v1/contacts?' . http_build_query([
+        $response = $this->getJson('/api/v1/contacts?'.http_build_query([
             'keyword' => 'ユニーク太郎',
             'category_id' => $category->id,
         ]));

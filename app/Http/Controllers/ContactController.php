@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\ExportContactRequest;
+use App\Http\Requests\StoreContactRequest;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Tag;
@@ -97,7 +97,7 @@ class ContactController extends Controller
                 '建物',
                 'カテゴリ',
                 '内容',
-                '作成日時'
+                '作成日時',
             ]);
 
             $genderMap = [1 => '男性', 2 => '女性', 3 => 'その他'];
@@ -105,7 +105,7 @@ class ContactController extends Controller
             foreach ($contacts as $contact) {
                 fputcsv($handle, [
                     $contact->id,
-                    $contact->first_name . ' ' . $contact->last_name,
+                    $contact->first_name.' '.$contact->last_name,
                     $genderMap[$contact->gender] ?? '不明',
                     $contact->email,
                     $contact->tel,
@@ -121,7 +121,7 @@ class ContactController extends Controller
         });
 
         $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
-        $response->headers->set('Content-Disposition', 'attachment; filename="contacts_' . date('Ymd_His') . '.csv"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="contacts_'.date('Ymd_His').'.csv"');
 
         return $response;
     }
